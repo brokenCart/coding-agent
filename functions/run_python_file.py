@@ -1,6 +1,31 @@
 import os
 import subprocess
 
+from config import EXECUTION_TIMEOUT
+
+schema_run_python_file = {
+    "type": "function",
+    "function": {
+        "name": "run_python_file",
+        "description": "Executes a Python file with optional arguments, relative to the working directory",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "Path to the Python file to execute, relative to the working directory",
+                },
+                "args": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Optional arguments to pass to the Python file",
+                },
+            },
+            "required": ["file_path"],
+        },
+    },
+}
+
 
 def run_python_file(
     working_directory: str, file_path: str, args: list[str] | None = None
@@ -14,15 +39,21 @@ def run_python_file(
 
         if not os.path.isfile(target_file):
             return f'Error: "{file_path}" does not exist or is not a regular file'
-        
+
         if not target_file.endswith(".py"):
             return f'Error: "{file_path}" is not a Python file'
-        
+
         command = ["python", target_file]
         if args:
             command.extend(args)
 
-        result = subprocess.run(command, cwd=abs_working_dir, capture_output=True, text=True, timeout=30)
+        result = subprocess.run(
+            command,
+            cwd=abs_working_dir,
+            capture_output=True,
+            text=True,
+            timeout=EXECUTION_TIMEOUT,
+        )
         output: list[str] = []
         if result.returncode != 0:
             output.append(f"Process exited with code {result.returncode}")
