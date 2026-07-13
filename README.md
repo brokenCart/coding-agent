@@ -1,4 +1,4 @@
-# toy-coding-agent
+# coding-agent
 A toy coding agent for python code.
 
 ## todo
