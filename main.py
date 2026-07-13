@@ -77,7 +77,9 @@ def generate_content(
             continue
         result_message = call_function(tool_call, verbose)
         if not result_message.get("content"):
-            raise RuntimeError(f"Empty function response for {tool_call.function.name}")
+            result_message["content"] = (
+                "Tool executed successfully but returned no output."
+            )
         if verbose:
             print(f"-> {result_message['content']}")
         messages.append(result_message)
