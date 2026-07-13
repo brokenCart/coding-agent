@@ -1,8 +1,13 @@
+import argparse
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
+
+parser = argparse.ArgumentParser(description="ChatBot")
+parser.add_argument("user_prompt", type=str, help="User Prompt")
+args = parser.parse_args()
 
 api_key = os.getenv("OPENROUTER_API_KEY")
 if not api_key:
@@ -16,7 +21,7 @@ client = OpenAI(
 messages = [
     {
         "role": "user",
-        "content": "Who won the FIFA World Cup in 2022? Answer in one word.",
+        "content": args.user_prompt,
     },
 ]
 
