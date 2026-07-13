@@ -24,4 +24,10 @@ response = client.chat.completions.create(
     model="openrouter/free",
     messages=messages,
 )
+
+if not response.usage:
+    raise RuntimeError("Failed API call. Please check your API key and model availability.")
+
+print(f"Prompt tokens: {response.usage.prompt_tokens}")
+print(f"Response tokens: {response.usage.completion_tokens}")
 print(response.choices[0].message.content)
