@@ -9,9 +9,6 @@ def get_files_info(working_directory: str, directory: str = ".") -> str:
         if not os.path.commonpath([abs_working_dir, target_dir]) == abs_working_dir:
             return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
 
-        if not os.path.exists(target_dir):
-            return f'Error: "{directory}" does not exist'
-
         if not os.path.isdir(target_dir):
             return f'Error: "{directory}" is not a directory'
 
