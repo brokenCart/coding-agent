@@ -2,7 +2,7 @@ from functions.write_file import write_file
 
 
 def test_write_file():
-    # Valid directory within the working directory
+    # Valid path within the working directory
     print(write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum"))
     print("---\n")
 
