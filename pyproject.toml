@@ -1,7 +1,7 @@
 [project]
-name = "toy-coding-agent"
+name = "coding-agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "A toy coding agent for python code."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
