@@ -33,7 +33,7 @@ def main():
     generate_content(client, messages)
 
 
-def generate_content(client, messages):
+def generate_content(client: OpenAI, messages):
     response = client.chat.completions.create(
         model="openrouter/free",
         messages=messages,
