@@ -3,14 +3,15 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
+load_dotenv()
+
+parser = argparse.ArgumentParser(description="ChatBot")
+parser.add_argument("user_prompt", type=str, help="User prompt")
+parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
+args = parser.parse_args()
+
 
 def main():
-    load_dotenv()
-
-    parser = argparse.ArgumentParser(description="ChatBot")
-    parser.add_argument("user_prompt", type=str, help="User Prompt")
-    args = parser.parse_args()
-
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
         raise RuntimeError(
@@ -43,8 +44,11 @@ def generate_content(client, messages):
             "Failed API call. Please check your API key and model availability."
         )
 
-    print(f"Prompt tokens: {response.usage.prompt_tokens}")
-    print(f"Response tokens: {response.usage.completion_tokens}")
+    if args.verbose:
+        print(f"User prompt: {args.user_prompt}\n")
+        print(f"Prompt tokens: {response.usage.prompt_tokens}")
+        print(f"Response tokens: {response.usage.completion_tokens}")
+
     print(response.choices[0].message.content)
 
 
