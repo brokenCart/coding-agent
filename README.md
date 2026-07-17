@@ -164,7 +164,3 @@ coding-agent/
 
 - [ ] Add function to run shell commands
 - [ ] Add ability for the user to prompt again (multi-turn conversation)
-
-## 📝 License
-
-This project is licensed under the [MIT License](LICENSE).
